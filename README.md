@@ -1,3 +1,3 @@
 # Rust in Action
 
-Tim McNamara
+**Authors:** Tim McNamara
