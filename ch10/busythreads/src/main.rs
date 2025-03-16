@@ -1,17 +1,17 @@
-use std::{
-    thread,
-    time::{self, Instant},
-};
+use std::{thread, time};
 
 fn main() {
-    for n in 1..1001 {
+    for n in 1..=1000 {
         let mut handlers: Vec<thread::JoinHandle<()>> = Vec::with_capacity(n);
 
         let start = time::Instant::now();
         for _m in 0..n {
             let handle = thread::spawn(|| {
+                let start = time::Instant::now();
                 let pause = time::Duration::from_millis(20);
-                thread::sleep(pause);
+                while start.elapsed() < pause {
+                    thread::yield_now();
+                }
             });
             handlers.push(handle);
         }
